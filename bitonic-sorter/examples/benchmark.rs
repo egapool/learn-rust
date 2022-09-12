@@ -42,9 +42,9 @@ fn run_sorts(bits: u32) {
     println!("speed up: {:.2}x", seq_duration / par_duration);
 }
 
-fn timed_sort<F>(sorter: &F, len: usize, name:&str) -> f64
-    where
-        F:Fn(&mut [u32], &SortOrder) -> Result<(), String>,
+fn timed_sort<F>(sorter: &F, len: usize, name: &str) -> f64
+where
+    F: Fn(&mut [u32], &SortOrder) -> Result<(), String>,
 {
     let mut x = new_u32_vec(len);
 
@@ -54,7 +54,12 @@ fn timed_sort<F>(sorter: &F, len: usize, name:&str) -> f64
 
     let nano_secs = dur.subsec_nanos() as f64 + dur.as_secs() as f64 * 1e9_f64;
 
-    println!("{}: sorted {} intergs in {} secondes", name, len, nano_secs / 1e9);
+    println!(
+        "{}: sorted {} intergs in {} secondes",
+        name,
+        len,
+        nano_secs / 1e9
+    );
 
     assert!(is_sort_ascending(&x));
 
